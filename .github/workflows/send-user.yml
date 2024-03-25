@@ -30,6 +30,8 @@ jobs:
           USER=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
           PASSWORD=$(openssl rand -base64 12)
 
+          echo $USER
+
 
           curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
