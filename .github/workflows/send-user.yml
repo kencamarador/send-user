@@ -35,10 +35,7 @@ jobs:
 
           curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
-            "accountEnabled": true,
-            "passwordProfile": {
-              "forceChangePasswordNextSignIn": true,
-              "password": "'"$PASSWORD"'"
+            "accountEnabled": true
             }
           }' \
           https://graph.microsoft.com/v1.0/users/$USER
