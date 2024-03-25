@@ -28,18 +28,14 @@ jobs:
           echo "Got the token"
 
           USER=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
-          PASSWORD=$(openssl rand -base64 12)
+
 
           echo $USER
 
 
           curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
-            "accountEnabled": true,
-            "passwordProfile": {
-              "forceChangePasswordNextSignIn": true,
-              "password": "'"$PASSWORD"'"
-            }
+            "accountEnabled": true
           }' \
           https://graph.microsoft.com/v1.0/users/$USER
 
