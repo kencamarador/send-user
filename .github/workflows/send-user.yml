@@ -43,3 +43,8 @@ jobs:
           }' \
           https://graph.microsoft.com/v1.0/users/$USER
 
+
+          SENDGRID_DATA="{\"personalizations\": [{\"to\": [{\"email\": \"admin@kencamarador.com\"},\"from\": {\"email\": \"demo@kencamarador.com\"},\"subject\": \"Active user list as of $EXECUTION_TIME\",\"content\": [{\"type\": \"text/html\",\"value\": \"Hi,<br/><br/>A list of active users as of is attached.<br/><br/>Regards<br/>DevOps Bot\"}]}"
+          echo $SENDGRID_DATA > $MAIL_PAYLOAD_FILE
+
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data @$MAIL_PAYLOAD_FILE
