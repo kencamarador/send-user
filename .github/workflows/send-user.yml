@@ -41,7 +41,17 @@ jobs:
           https://graph.microsoft.com/v1.0/users/$USER
 
 
-          SENDGRID_DATA="{\"personalizations\": [{\"to\": [{\"email\": \"admin@kencamarador.com\"},\"from\": {\"email\": \"demo@kencamarador.com\"},\"subject\": \"Active user list as of $EXECUTION_TIME\",\"content\": [{\"type\": \"text/html\",\"value\": \"Hi,<br/><br/>A list of active users as of is attached.<br/><br/>Regards<br/>DevOps Bot\"}]}"
-          echo $SENDGRID_DATA > $MAIL_PAYLOAD_FILE
+          curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
+          -d '{
+            "passwordProfile": {
+              "forceChangePasswordNextSignIn": true,
+              "password": "'"$PASSWORD"'"
+            }
+          }' \
+          https://graph.microsoft.com/v1.0/users/$USER
 
-          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data @$MAIL_PAYLOAD_FILE
+
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data '{"personalizations":[{"to":[{"email":"ken-camarador@hotmail.com","name":"John Doe"}],"subject":"Hello, World!"}],"content": [{"type": "text/plain", "value": "Heya!"}],"from":{"email":"admin@kencamarador.com","name":"Sam Smith"},"reply_to":{"email":"admin@kencamarador.com","name":"Sam Smith"}}'
+
+
+
