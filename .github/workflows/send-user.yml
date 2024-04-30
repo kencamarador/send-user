@@ -32,6 +32,7 @@ jobs:
           PASSWORD=$(openssl rand -base64 12)
 
           echo $USER
+          echo $REPORTER
 
 
           curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
