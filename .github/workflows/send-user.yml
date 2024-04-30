@@ -12,6 +12,7 @@ jobs:
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
           LASTNAME: ${{ github.event.client_payload.lastname }}
           JOBTITLE: ${{ github.event.client_payload.title }}
+          REPORTER: ${{ github.event.client_payload.reporter }}
         run: |
           CLIENT_ID=${{ vars.CLIENT_ID }}
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
@@ -51,7 +52,7 @@ jobs:
           https://graph.microsoft.com/v1.0/users/$USER
 
 
-          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data "{\"personalizations\":[{\"to\":[{\"email\":\"ken-camarador@hotmail.com\",\"name\":\"John Doe\"}],\"subject\":\"Hello, World!\"}],\"content\": [{\"type\": \"text/plain\", \"value\": \"Heya! $PASSWORD\"}],\"from\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Sam Smith\"},\"reply_to\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Sam Smith\"}}"
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data "{\"personalizations\":[{\"to\":[{\"email\":\"$REPORTER\",\"name\":\"John Doe\"}],\"subject\":\"Hello, World!\"}],\"content\": [{\"type\": \"text/plain\", \"value\": \"Heya! This is your temporary password: $PASSWORD\"}],\"from\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Sam Smith\"},\"reply_to\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Sam Smith\"}}"
 
 
 
