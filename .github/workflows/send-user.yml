@@ -51,7 +51,7 @@ jobs:
           https://graph.microsoft.com/v1.0/users/$USER
 
 
-          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data '{"personalizations":[{"to":[{"email":"ken-camarador@hotmail.com","name":"John Doe"}],"subject":"Hello, World!"}],"content": [{"type": "text/plain", "value": "Heya!"}],"from":{"email":"admin@kencamarador.com","name":"Sam Smith"},"reply_to":{"email":"admin@kencamarador.com","name":"Sam Smith"}}'
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data "{\"personalizations\":[{\"to\":[{\"email\":\"ken-camarador@hotmail.com\",\"name\":\"John Doe\"}],\"subject\":\"Hello, World!\"}],\"content\": [{\"type\": \"text/plain\", \"value\": \"Heya! $PASSWORD\"}],\"from\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Sam Smith\"},\"reply_to\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Sam Smith\"}}"
 
 
 
