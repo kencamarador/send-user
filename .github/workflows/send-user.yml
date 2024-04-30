@@ -29,7 +29,7 @@ jobs:
           echo "Got the token"
 
           USER=$(echo "$FIRSTNAME.$LASTNAME@kencamarador.com" | tr '[:upper:]' '[:lower:]')
-          PASSWORD=$(openssl rand -base64 12)
+          PASSWORD=$(openssl rand -base64 12 | tr -dc 'a-zA-Z0-9!@#$%^&*()-_+=')
 
           echo $USER
           echo $REPORTER
