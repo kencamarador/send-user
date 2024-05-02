@@ -53,7 +53,7 @@ jobs:
           https://graph.microsoft.com/v1.0/users/$USER
 
 
-          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data "{\"personalizations\":[{\"to\":[{\"email\":\"$REPORTER\",\"name\":\"John Doe\"}],\"subject\":\"Hello, World!\"}],\"content\": [{\"type\": \"text/plain\", \"value\": \"Hi $FIRSTNAME This is your temporary password: $PASSWORD\"}],\"from\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Service Desk\"},\"reply_to\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Service Desk\"}}"
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send -H "Authorization: Bearer $SENDGRID_API_KEY" -H "Content-Type: application/json" --data "{\"personalizations\":[{\"to\":[{\"email\":\"$REPORTER\",\"name\":\"John Doe\"}],\"subject\":\"Your Work Credentials\"}],\"content\": [{\"type\": \"text/plain\", \"value\": \"Hi $FIRSTNAME This is your temporary password: $PASSWORD\"}],\"from\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Service Desk\"},\"reply_to\":{\"email\":\"admin@kencamarador.com\",\"name\":\"Service Desk\"}}"
 
 
 
