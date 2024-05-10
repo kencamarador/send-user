@@ -14,7 +14,7 @@ jobs:
           JOBTITLE: ${{ github.event.client_payload.title }}
           REPORTER: ${{ github.event.client_payload.reporter }}
         run: |
-          CLIENT_ID=${{ vars.CLIENT_ID }}
+          CLIENT_ID=${{ secrets.CLIENT_ID }}
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
           SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
           MAIL_PAYLOAD_FILE="/tmp/mailpayload"
@@ -38,7 +38,6 @@ jobs:
           curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
             "accountEnabled": true
-            }
           }' \
           https://graph.microsoft.com/v1.0/users/$USER
 
@@ -53,13 +52,13 @@ jobs:
           https://graph.microsoft.com/v1.0/users/$USER
 
 
-            curl -X POST --url https://api.sendgrid.com/v3/mail/send \
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send \
             -H "Authorization: Bearer $SENDGRID_API_KEY" \
             -H "Content-Type: application/json" \
             --data '{
               "personalizations": [{
                 "to": [{
-                  "email": "$REPORTER",
+                  "email": "'"$REPORTER"'",
                   "name": "John Doe"
                 }],
                 "subject": "Your Work Credentials"
@@ -73,20 +72,19 @@ jobs:
                                   <span style=\"color:#888;font-size:16px;vertical-align:middle;margin-left:10px;border-left:1px solid #888;height:20px;\"></span>
                                   <span style=\"color:#888;font-size:20px;margin-left:10px;\">Arteria AI</span>
                               </div>
-                            Hi $FIRSTNAME,
+                            Hi '"$FIRSTNAME"',
 
                             Welcome to the Team! Below you will find your temporary login credentials to access your Arteria AI account. You will be prompted to setup Multi Factor Authentication, so please ensure you have your mobile phone near you. 
-                                        <div style=\"border: 1px solid #ccc; background-color: #EAE8F7; padding: 0 10px; border-radius: 5px;\">
-                                            <p><strong>Email:</strong>$FIRSTNAME.$LASTNAME@kencamarador.com</p>
-                                            <p><strong>Password:</strong>$PASSWORD</p>
-                                        </div>
+                            <div style=\"border: 1px solid #ccc; background-color: #EAE8F7; padding: 0 10px; border-radius: 5px;\">
+                              <p><strong>Email:</strong>'"$FIRSTNAME.$LASTNAME@kencamarador.com"'</p>
+                              <p><strong>Password:</strong>'"$PASSWORD"'</p>
+                            </div>
                             <p>If you are having issues with your account, please inform your manager.</p>
                             Regards,
                             Service Desk
-                                    </div>
-
-                                </div>
-                            </body>"
+                          </div>
+                        </div>
+                      </body>"
               }],
               "from": {
                 "email": "admin@kencamarador.com",
@@ -97,6 +95,3 @@ jobs:
                 "name": "Service Desk"
               }
             }'
-
-
-
