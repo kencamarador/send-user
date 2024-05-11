@@ -68,7 +68,7 @@ jobs:
                 "LASTNAME": "$LASTNAME",
                 "PASSWORD": "$PASSWORD"
               },
-              "template_id": "d-562a4a3c57b14e03a924d084c0d066dc "  
+              "template_id": "d-562a4a3c57b14e03a924d084c0d066dc"  
             }],
             "from": {
               "email": "admin@kencamarador.com",
