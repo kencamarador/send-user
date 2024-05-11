@@ -54,29 +54,32 @@ jobs:
 
 
           curl -X POST --url https://api.sendgrid.com/v3/mail/send \
-            -H "Authorization: Bearer $SENDGRID_API_KEY" \
-            -H "Content-Type: application/json" \
-            --data '{
-              "personalizations": [{
-                "to": [{
-                  "email": "$REPORTER",
-                  "name": "John Doe"
-                }],
-                "subject": "Your Work Credentials"
+          -H "Authorization: Bearer $SENDGRID_API_KEY" \
+          -H "Content-Type: application/json" \
+          --data '{
+            "personalizations": [{
+              "to": [{
+                "email": "$REPORTER",
+                "name": "John Doe"
               }],
-              "content": [{
-                "type": "text/plain",
-                "value": "<body style=\"font-family: Arial, sans-serif; margin: 0; padding: 0;\"><div style=\"max-width: 600px; margin: 10px 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 5px;\"><div style=\"border-bottom: 1px solid #ccc; padding-bottom: 10px; display: flex; align-items: center;\"><h2 style=\"color: #46369C; margin: 0; font-weight: normal;\">Your Credentials</h2><span style=\"color: #888; font-size: 16px; vertical-align: middle; margin-left: 10px; border-left: 1px solid #888; height: 20px;\"></span><span style=\"color: #888; font-size: 20px; margin-left: 10px;\">Arteria AI</span></div> Hi $FIRSTNAME, <p>Welcome to the Team! Below you will find your temporary login credentials to access your Arteria AI account. You will be prompted to setup Multi-Factor Authentication, so please ensure you have your mobile phone near you.</p> <div style=\"border: 1px solid #ccc; background-color: #EAE8F7; padding: 0 10px; border-radius: 5px;\"><p><strong>Email:</strong> $FIRSTNAME.$LASTNAME@kencamarador.com</p><p><strong>Password:</strong> $PASSWORD</p></div> <p>If you are having issues with your account, please inform your manager.</p><p>Regards, Service Desk</p></div></div></body>"
-              }],
-              "from": {
-                "email": "admin@kencamarador.com",
-                "name": "Service Desk"
+              "subject": "Your Work Credentials",
+              "dynamic_template_data": {
+                "FIRSTNAME": "$FIRSTNAME",
+                "LASTNAME": "$LASTNAME",
+                "PASSWORD": "$PASSWORD"
               },
-              "reply_to": {
-                "email": "admin@kencamarador.com",
-                "name": "Service Desk"
-              }
-            }'
+              "template_id": "d-562a4a3c57b14e03a924d084c0d066dc "  
+            }],
+            "from": {
+              "email": "admin@kencamarador.com",
+              "name": "Service Desk"
+            },
+            "reply_to": {
+              "email": "admin@kencamarador.com",
+              "name": "Service Desk"
+            }
+          }'
+
 
 
 
