@@ -83,7 +83,7 @@ jobs:
               "name": "Service Desk"
             },
             "dynamic_template_data": {
-              "FIRSTNAME": "$FIRSTNAME",
+              "FIRSTNAME": "FIRSTNAME",
               "LASTNAME": "$LASTNAME",
               "PASSWORD": "$PASSWORD"
             },
