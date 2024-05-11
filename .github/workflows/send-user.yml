@@ -70,6 +70,7 @@ jobs:
                   "dynamic_template_data":{
                       "FIRSTNAME": "'"$FIRSTNAME"'",
                       "LASTNAME": "'"$LASTNAME"'",
+                      "EMAIL":"'"$USER"'"
                       "PASSWORD": "'"$PASSWORD"'"
                     }
                 }
