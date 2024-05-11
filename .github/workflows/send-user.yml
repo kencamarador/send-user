@@ -53,34 +53,27 @@ jobs:
           https://graph.microsoft.com/v1.0/users/$USER
 
 
-           curl -X POST --url https://api.sendgrid.com/v3/mail/send \
+          curl -X POST --url https://api.sendgrid.com/v3/mail/send \
           -H "Authorization: Bearer $SENDGRID_API_KEY" \
           -H "Content-Type: application/json" \
           --data '{
-            "personalizations": [
-              {
-                "to": [
-                  {
-                    "email": "'"$REPORTER"'",
-                    "name": "John Doe"
-                  }
-                ],
-                "subject": "Your Work Credentials"
-              }
+          "from":{
+                "email":"admin@kencamarador.com"
+            },
+            "personalizations":[
+                {
+                  "to":[
+                      {
+                        "email":"admin@kencamarador.com"
+                      }
+                  ],
+                  "dynamic_template_data":{
+                      "FIRSTNAME": "'"$FIRSTNAME"'",
+                      "LASTNAME": "'"$LASTNAME"'",
+                      "PASSWORD": "'"$PASSWORD"'"
+                    }
+                }
             ],
-            "from": {
-              "email": "admin@kencamarador.com",
-              "name": "Service Desk"
-            },
-            "reply_to": {
-              "email": "admin@kencamarador.com",
-              "name": "Service Desk"
-            },
-            "dynamic_template_data":{
-              "first": "test",
-            },
-            "template_id": "d-562a4a3c57b14e03a924d084c0d066dc"
+            "template_id":"d-562a4a3c57b14e03a924d084c0d066dc"
           }'
-
-
 
