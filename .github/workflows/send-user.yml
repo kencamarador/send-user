@@ -33,7 +33,7 @@ jobs:
 
           echo $USER
           echo $REPORTER
-
+          echo $FIRSTNAME
 
           curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           -d '{
@@ -83,9 +83,9 @@ jobs:
               "name": "Service Desk"
             },
             "dynamic_template_data": {
-              "FIRSTNAME": "'"$FIRSTNAME"'",
-              "LASTNAME": "'"$LASTNAME"'",
-              "PASSWORD": "'"$PASSWORD"'"
+              "FIRSTNAME": "$FIRSTNAME",
+              "LASTNAME": "$LASTNAME",
+              "PASSWORD": "$PASSWORD"
             },
             "template_id": "d-562a4a3c57b14e03a924d084c0d066dc"
           }'
