@@ -57,19 +57,23 @@ jobs:
           -H "Authorization: Bearer $SENDGRID_API_KEY" \
           -H "Content-Type: application/json" \
           --data '{
-            "personalizations": [{
-              "to": [{
-                "email": "$REPORTER",
-                "name": "John Doe"
-              }],
-              "subject": "Your Work Credentials",
-              "dynamic_template_data": {
-                "FIRSTNAME": "$FIRSTNAME",
-                "LASTNAME": "$LASTNAME",
-                "PASSWORD": "$PASSWORD"
-              },
-              "template_id": "d-562a4a3c57b14e03a924d084c0d066dc"  
-            }],
+            "personalizations": [
+              {
+                "to": [
+                  {
+                    "email": "'"$REPORTER"'",
+                    "name": "John Doe"
+                  }
+                ],
+                "subject": "Your Work Credentials"
+              }
+            ],
+            "content": [
+              {
+                "type": "text/plain",
+                "value": "Hi '$FIRSTNAME', This is your temporary password: '$PASSWORD'"
+              }
+            ],
             "from": {
               "email": "admin@kencamarador.com",
               "name": "Service Desk"
@@ -77,9 +81,14 @@ jobs:
             "reply_to": {
               "email": "admin@kencamarador.com",
               "name": "Service Desk"
-            }
+            },
+            "dynamic_template_data": {
+              "FIRSTNAME": "'"$FIRSTNAME"'",
+              "LASTNAME": "'"$LASTNAME"'",
+              "PASSWORD": "'"$PASSWORD"'"
+            },
+            "template_id": "d-562a4a3c57b14e03a924d084c0d066dc"
           }'
-
 
 
 
